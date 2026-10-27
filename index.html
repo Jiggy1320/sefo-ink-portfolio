@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sefo Ink | Premium Tattoos in Phoenix, AZ</title>
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-main: #f5f5f5;
+            --text-muted: #a3a3a3;
+            --accent: #ffffff;
+            --border: #262626;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Scroll Reveal Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Typography */
+        h1, h2, h3 {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            color: var(--accent);
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-muted);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 5% 5rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Masonry Portfolio */
+        .portfolio-section {
+            padding: 5rem 5%;
+        }
+
+        .masonry-grid {
+            display: columns;
+            column-count: 3;
+            column-gap: 1.5rem;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .masonry-item img {
+            width: 100%;
+            display: block;
+            border-radius: 4px;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+        }
+
+        .masonry-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+            opacity: 0;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+            transition: opacity 0.4s ease;
+        }
+
+        .masonry-item:hover img {
+            transform: scale(1.03);
+            filter: brightness(0.7);
+        }
+
+        .masonry-item:hover .masonry-overlay {
+            opacity: 1;
+        }
+
+        .masonry-overlay span {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        /* Booking Section */
+        .booking-section {
+            padding: 5rem 5%;
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .booking-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .booking-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .booking-intro a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 2px;
+            transition: opacity 0.3s ease;
+        }
+
+        .booking-intro a:hover {
+            opacity: 0.7;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+
+        input, select, textarea {
+            background-color: var(--bg-dark);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 1rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px var(--accent);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            background-color: var(--accent);
+            color: var(--bg-dark);
+            border: none;
+            padding: 1.25rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.05) translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 5%;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        footer p {
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .masonry-grid { column-count: 2; }
+        }
+
+        @media (max-width: 600px) {
+            .masonry-grid { column-count: 1; }
+            .nav-links { display: none; }
+            .hero { padding: 5rem 5% 3rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                padding: 0.8rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">SEFO INK</a>
+        <div class="nav-links">
+            <a href="#portfolio">Portfolio</a>
+            <a href="#booking">Book Consultation</a>
+        </div>
+    </nav>
+
+    <header class="hero reveal">
+        <span class="subtitle">Phoenix, Arizona</span>
+        <h1>Precision & Vision</h1>
+        <p>Custom tattoo design specializing in black and grey realism, surrealism, and fine line execution. Operating out of Phoenix, AZ.</p>
+    </header>
+
+    <section id="portfolio" class="portfolio-section">
+        <div class="masonry-grid">
+            <!-- Updated exact filenames provided by user -->
+            <div class="masonry-item reveal delay-100">
+                <img src="tattoo-1.jpg.jpg" alt="Black and Grey Phoenix">
+                <div class="masonry-overlay"><span>Black & Grey Phoenix</span></div>
+            </div>
+            
+            <div class="masonry-item reveal delay-200">
+                <img src="tattoo-3.jpg.jpg" alt="Skull and Cowboy Hat">
+                <div class="masonry-overlay"><span>Surrealism Skull</span></div>
+            </div>
+
+            <div class="masonry-item reveal delay-300">
+                <img src="tattoo-5.jpg.jpeg" alt="Wolf and Celtic Roots">
+                <div class="masonry-overlay"><span>Wildlife Realism</span></div>
+            </div>
+
+            <div class="masonry-item reveal delay-100">
+                <img src="tattoo-7.jpg.jpeg" alt="Racecar Memorial Piece">
+                <div class="masonry-overlay"><span>Memorial Realism</span></div>
+            </div>
+
+            <div class="masonry-item reveal delay-200">
+                <img src="tattoo-2.jpg.jpeg" alt="Sword and Map Forearm">
+                <div class="masonry-overlay"><span>Fantasy Cartography</span></div>
+            </div>
+
+            <div class="masonry-item reveal delay-300">
+                <img src="tattoo-4.jpg.jpeg" alt="Eye Clock Rose">
+                <div class="masonry-overlay"><span>Surrealist Timepiece</span></div>
+            </div>
+
+            <div class="masonry-item reveal delay-100">
+                <img src="tattoo-6.jpg.jpeg" alt="Lion Cub Portrait">
+                <div class="masonry-overlay"><span>Wildlife Portraiture</span></div>
+            </div>
+
+            <div class="masonry-item reveal delay-200">
+                <img src="tattoo-8.jpg.jpeg" alt="Lion Pride Sleeve">
+                <div class="masonry-overlay"><span>Pride Sleeve Progression</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="booking-section reveal">
+        <div class="booking-container">
+            <div class="booking-intro">
+                <span class="subtitle">Start the Process</span>
+                <h2>Consultation Request</h2>
+                <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">
+                    Fill out the form below with your concept details. For urgent inquiries, message via <a href="https://wa.me/15167570577" target="_blank">WhatsApp</a> or connect on <a href="https://www.facebook.com/share/19j3vr2CMT/" target="_blank">Facebook</a>.
+                </p>
+            </div>
+
+            <!-- To activate, replace the action URL with a free Formspree.io endpoint -->
+            <form action="https://formspree.io/f/YOUR_ENDPOINT_HERE" method="POST">
+                <div class="input-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+
+                <div class="input-group">
+                    <label for="placement">Tattoo Placement</label>
+                    <input type="text" id="placement" name="placement" required placeholder="e.g., Outer right forearm">
+                </div>
+
+                <div class="input-group">
+                    <label for="size">Estimated Size (Inches)</label>
+                    <select id="size" name="size" required>
+                        <option value="" disabled selected>Select approximate size</option>
+                        <option value="1-3">Small (1-3 inches)</option>
+                        <option value="4-6">Medium (4-6 inches)</option>
+                        <option value="7-10">Large (7-10 inches)</option>
+                        <option value="sleeve">Full/Half Sleeve or Backpiece</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="description">Concept Description</label>
+                    <textarea id="description" name="description" required placeholder="Describe your idea in detail. What is the subject matter? Any specific style preferences?"></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Submit Request</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Action -->
+    <a href="https://wa.me/15167570577" class="whatsapp-float" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        Chat to Book
+    </a>
+
+    <footer class="reveal delay-100">
+        <p>&copy; 2026 Sefo Ink. Phoenix, Arizona. All rights reserved.</p>
+        <div class="social-links">
+            <a href="https://www.facebook.com/share/19j3vr2CMT/" target="_blank">Facebook</a>
+            <a href="https://wa.me/15167570577" target="_blank">WhatsApp</a>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll animation observer
+        document.addEventListener("DOMContentLoaded", () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
